@@ -1,7 +1,7 @@
 %define __spec_install_post %{nil}
 
-Summary:	A web-based user account administration interface
-Name:		usermin
+Summary:	A web-based user account administration interface with webmail
+Name:		usermin-webmail
 Version:	1.440
 Release:	%mkrel 1
 Provides:	%{name}-%{version}
@@ -15,9 +15,16 @@ Requires(pre):	rpm-helper
 Requires:	perl perl-Net_SSLeay 
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildArch:	noarch
+Provides:	usermin = %{name}-%{version}
 
 %description
 A web-based user account administration interface for Unix systems.
+If you just want to use Usermin for web-based email, there is 
+a modified package available with a better theme and default 
+configuration for that purpose. It assumes that your system is 
+already running a properly configured IMAP server such as Dovecot, 
+but can be easily configured to read mail from Maildir or 
+mbox-formatted directories instead.
 
 After installation, enter the URL https://localhost:20000/ into your
 browser and login as any user on your system.
@@ -35,6 +42,8 @@ rm -f mount/openbsd-mounts-*
 #chmod -R og-rxw .
 
 %install
+rm -rf %{buildroot}
+
 mkdir -p %{buildroot}{%{_sysconfdir}/{pam.d,sysconfig},%{_initrddir},%{_var}/run/usermin,%{_datadir}/usermin}
 
 cp -rp * %{buildroot}%{_datadir}/usermin
