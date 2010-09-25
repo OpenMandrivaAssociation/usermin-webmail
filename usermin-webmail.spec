@@ -2,7 +2,7 @@
 
 Summary:	A web-based user account administration interface with webmail
 Name:		usermin-webmail
-Version:	1.440
+Version:	1.450
 Release:	%mkrel 1
 Provides:	%{name}-%{version}
 License:	BSD
