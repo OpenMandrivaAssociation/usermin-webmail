@@ -2,20 +2,20 @@
 
 Summary:	A web-based user account administration interface with webmail
 Name:		usermin-webmail
-Version:	1.450
+Version:	1.470
 Release:	%mkrel 1
 Provides:	%{name}-%{version}
 License:	BSD
 Group:		System/Configuration/Other
 URL:		http://www.usermin.com/
-Source:		http://www.webmin.com/download/%{name}-%{version}.tar.gz
+Source:		http://prdownloads.sourceforge.net/webadmin/%{name}-%{version}.tar.gz
 Patch3:		usermin-1.440-never-fail-detect-os.patch
 Requires:	perl
 Requires(pre):	rpm-helper
 Requires:	perl perl-Net_SSLeay 
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildArch:	noarch
-Provides:	usermin = %{name}-%{version}
+Provides:	usermin = %{version}
 
 %description
 A web-based user account administration interface for Unix systems.
