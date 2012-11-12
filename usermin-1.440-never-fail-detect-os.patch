@@ -1,0 +1,19 @@
+--- ./oschooser.pl.gege	2003-05-12 01:49:13.000000000 +0200
++++ ./oschooser.pl	2004-02-27 10:49:34.687372608 +0100
+@@ -56,8 +56,13 @@
+ 			# Do we have a tty?
+ 			local $rv = system("tty >/dev/null 2>&1");
+ 			if ($?) {
+-				print "Failed to detect operating system\n";
+-				exit 1;
++#				print "Failed to detect operating system\n";
++#				exit 1;
++				foreach $o (@list) {
++					$ver = $o
++					if ($o->[0] eq "Mandrake Linux" && (!$ver || $ver->[1] < $o->[1]));
++				}
++				print "WARNING: could not guess OS, falling back to $ver->[0] version $ver->[1]\n";
+ 				}
+ 			else {
+ 				$auto = 0;
+
