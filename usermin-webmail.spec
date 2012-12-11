@@ -1,9 +1,10 @@
 %define __spec_install_post %{nil}
+%define __noautoreq 'perl\\(\\)'
 
 Summary:	A web-based user account administration interface with webmail
 Name:		usermin-webmail
 Version:	1.510
-Release:	%mkrel 1
+Release:	2
 Provides:	%{name}-%{version}
 License:	BSD
 Group:		System/Configuration/Other
@@ -13,7 +14,6 @@ Patch3:		usermin-1.440-never-fail-detect-os.patch
 Requires:	perl
 Requires(pre):	rpm-helper
 Requires:	perl perl-Net_SSLeay 
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildArch:	noarch
 Provides:	usermin = %{version}
 
@@ -42,8 +42,6 @@ rm -f mount/openbsd-mounts-*
 #chmod -R og-rxw .
 
 %install
-rm -rf %{buildroot}
-
 mkdir -p %{buildroot}{%{_sysconfdir}/{pam.d,sysconfig},%{_initrddir},%{_var}/run/usermin,%{_datadir}/usermin}
 
 cp -rp * %{buildroot}%{_datadir}/usermin
@@ -69,9 +67,6 @@ find %{buildroot}%{_datadir}/usermin \( \
 	-exec chmod 755 {} \;
 
 echo rpm >%{buildroot}%{_datadir}/usermin/install-type
-
-%clean
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
 
 %pre
 perl <<EOD;
@@ -163,4 +158,68 @@ fi
 %config(noreplace) %{_sysconfdir}/sysconfig/usermin
 %config(noreplace) %{_sysconfdir}/pam.d/usermin
 %config(noreplace) %{_initrddir}/usermin
+
+
+
+%changelog
+* Thu Jul 19 2012 Lonyai Gergely <aleph@mandriva.org> 1.510-1mdv2012.0
++ Revision: 810268
+- 1.510 Resubmit the tarball
+- 1.510
+
+* Thu Jan 26 2012 Lonyai Gergely <aleph@mandriva.org> 1.500-1
++ Revision: 769021
+- 1.500
+
+* Fri Nov 25 2011 Lonyai Gergely <aleph@mandriva.org> 1.490-1
++ Revision: 733418
+- 1.490
+
+* Wed Jul 13 2011 Lonyai Gergely <aleph@mandriva.org> 1.470-1
++ Revision: 689819
+- 1.470
+
+* Sat Sep 25 2010 Lonyai Gergely <aleph@mandriva.org> 1.450-1mdv2011.0
++ Revision: 581006
+- 1.450
+- Initial usermin-webmail package
+- Fork usermin to usermin-webmail
+
+* Tue Apr 06 2010 Sandro Cazzaniga <kharec@mandriva.org> 1.440-1mdv2010.1
++ Revision: 531977
+- drop patch1 and P4 applied upstream.
+- rediff patch 3
+- update to 1.440
+
+* Wed Jan 13 2010 Lonyai Gergely <aleph@mandriva.org> 1.430-1mdv2010.1
++ Revision: 490807
+- 1.430
+
+* Thu Oct 01 2009 Lonyai Gergely <aleph@mandriva.org> 1.420-1mdv2010.0
++ Revision: 452174
+- 1.420
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - rebuild
+
+* Fri Aug 08 2008 Thierry Vignaud <tv@mandriva.org> 1.350-2mdv2009.0
++ Revision: 269451
+- rebuild early 2009.0 package (before pixel changes)
+
+* Wed May 28 2008 Funda Wang <fwang@mandriva.org> 1.350-1mdv2009.0
++ Revision: 212469
+- rediff os_list patch
+- rediff init patch
+- New version 1.350
+
+* Wed Jan 02 2008 Olivier Blin <blino@mandriva.org> 1.150-2mdv2008.1
++ Revision: 140925
+- restore BuildRoot
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - kill re-definition of %%buildroot on Pixel's request
+
+* Thu Aug 23 2007 Thierry Vignaud <tv@mandriva.org> 1.150-2mdv2008.0
++ Revision: 69925
+- use %%mkrel
 
