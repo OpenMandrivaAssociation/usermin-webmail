@@ -8,7 +8,7 @@ Release:	3
 Provides:	%{name}-%{version}
 License:	BSD
 Group:		System/Configuration/Other
-URL:		http://www.usermin.com/
+URL:		https://www.usermin.com/
 Source:		http://prdownloads.sourceforge.net/webadmin/%{name}-%{version}.tar.gz
 Patch3:		usermin-1.440-never-fail-detect-os.patch
 Requires:	perl
